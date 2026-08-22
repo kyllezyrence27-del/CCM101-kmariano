@@ -43,6 +43,45 @@ The following resources will be used throughout the activity:
 
 The completed laboratory will contain technical reports, cloud infrastructure comparisons, a simple architecture diagram, screenshots, and a reflection documenting the learning experience.
 
+## Cloud Infrastructure Components
+
+- **Compute:** Provides processing power for applications and workloads.
+- **Storage:** Stores files, data, and other digital resources.
+- **Network:** Connects users, compute resources, and storage resources.
+- **User:** Represents the person accessing the cloud infrastructure.
+- **Internet Connection:** Provides external connectivity to the cloud environment.
+
+## Linux Commands Executed
+
+| Command | Purpose |
+|---|---|
+| `uname -a` | Displays system and kernel information. |
+| `lscpu` | Displays CPU and processor information. |
+| `free -h` | Displays memory usage. |
+| `df -h` | Displays disk space usage. |
+| `ip addr` | Displays network interface information. |
+| `ls` | Lists files and directories. |
+| `cd` | Changes the current directory. |
+| `mkdir` | Creates a new directory. |
+| `cat` | Displays the contents of a file. |
+| `git status` | Shows the current Git repository status. |
+| `git add` | Stages files for commit. |
+| `git commit` | Saves changes to the Git repository. |
+| `git push` | Uploads commits to GitHub. |
+
+## Skills Learned
+
+- Identifying the major components of cloud infrastructure.
+- Using Linux commands to investigate system resources.
+- Creating and formatting Markdown documentation.
+- Comparing cloud services from AWS, Microsoft Azure, and Google Cloud.
+- Designing a simple cloud infrastructure diagram.
+- Managing files and projects using Git and GitHub.
+
+## Challenges Encountered
+
+One challenge I encountered was understanding how the different cloud infrastructure components work together. I also had to become more familiar with Linux commands and Markdown formatting. Uploading and organizing the required files in the GitHub repository also required careful attention to the correct folder structure. By following the laboratory instructions step by step, I was able to complete the tasks and better understand cloud infrastructure.
+
 ## Author
 
 [KYLLE ZYRENCE MARIANO]
