@@ -85,3 +85,15 @@ AWS is suitable for a global e-commerce company because it provides services tha
 ## Overall Recommendation
 
 The recommended cloud platform depends on the specific requirements of each client. AWS is a strong general-purpose choice for startups and global e-commerce because of its broad services and scalability. Azure is appropriate for organizations that depend on Microsoft technologies, while GCP is a strong option for AI and data-intensive workloads.
+
+
+## Checkpoint 6 – Multi-Cloud Decision Matrix
+
+| Business Requirement | Recommended Platform | Justification |
+|---|---|---|
+| Startup Company | AWS | AWS provides scalable services that allow a startup to increase resources as the business grows. |
+| Enterprise Organization | Azure | Azure provides enterprise-focused services for security, identity, management, and application hosting. |
+| Microsoft Environment | Azure | Azure integrates closely with Microsoft technologies such as Windows Server and Microsoft 365. |
+| AI / Machine Learning | GCP | GCP provides services and tools that support artificial intelligence, machine learning, and data processing. |
+| Kubernetes Deployment | GCP | Google Kubernetes Engine (GKE) provides a managed environment for deploying and scaling containerized applications. |
+| Global Web Application | AWS | AWS provides scalable infrastructure and global services that can support web applications used by customers in different locations. |
