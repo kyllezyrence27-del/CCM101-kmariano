@@ -1,11 +1,11 @@
 # Mission Reflection
 
-## 1. Which cloud platform impressed you the most?
+This laboratory activity helped me understand the differences between AWS, Microsoft Azure, and Google Cloud Platform. I learned that although these providers offer similar cloud services, each platform has different strengths and features that may be more suitable for specific organizations.
 
-## 2. What similarities exist among AWS, Azure, and GCP?
+One important thing I learned is that choosing a cloud provider should depend on the requirements of the client. AWS can be a good option for organizations that need a wide variety of services, Azure is useful for environments that already depend on Microsoft technologies, and GCP is a strong choice for data analytics and artificial intelligence workloads.
 
-## 3. How do business requirements influence cloud platform selection?
+The client scenarios also showed me that there is no single cloud platform that is always the best. A startup may prioritize scalability, an enterprise may require strong management and security features, while an AI company may need specialized machine learning services. Understanding these requirements makes it easier to recommend an appropriate cloud solution.
 
-## 4. What did you learn from acting as a Cloud Solutions Consultant?
+The Linux investigation also helped me connect the concepts of cloud computing with actual server resources. By checking the operating system, CPU, memory, and disk space, I gained a better understanding of the type of information that can be considered when planning a cloud migration.
 
-## 5. How has your GitHub Cloud Computing Portfolio improved after completing this mission?
+Overall, this mission improved my knowledge of cloud platforms, service comparison, cloud migration, and infrastructure planning. It also gave me more experience organizing technical documentation and evidence in GitHub.
