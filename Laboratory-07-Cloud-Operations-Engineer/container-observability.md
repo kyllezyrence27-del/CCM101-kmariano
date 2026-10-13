@@ -1,12 +1,12 @@
 # Docker and Application Monitoring
 
-**Student:** Kylle Zyrene Mariano  
+**Student:** Kylle Mariano  
 **Course:** CCM101 – Cloud Computing  
 **Laboratory:** 07 – Cloud Operations Engineer
 
 ## 1. Introduction
 
-This report describes the deployment and monitoring of an Nginx web server using Docker. The activity involves checking the running container, sending HTTP requests, examining application logs, and observing resource consumption.
+This report documents the deployment and monitoring of an Nginx web server using Docker. The activity involved checking the running container, sending HTTP requests, examining application logs, and observing resource consumption.
 
 ## 2. Deploying the Nginx Container
 
@@ -18,13 +18,13 @@ Command used:
 docker run -d --name client-website -p 8080:80 nginx
 ```
 
-The following command can be used to verify that the container is running:
+To verify that the container is running, the following command was used:
 
 ```bash
 docker ps
 ```
 
-The website can be accessed locally through `http://localhost:8080`.
+The website was accessed locally through `http://localhost:8080`.
 
 ## 3. Testing HTTP Requests
 
@@ -36,15 +36,15 @@ The following command requests the Nginx welcome page:
 curl http://localhost:8080
 ```
 
-The server returns the HTML content of the welcome page when the request succeeds.
+The server returned the HTML content of the welcome page.
 
-A header-only request can also be performed:
+A header-only request was also performed:
 
 ```bash
 curl -I http://localhost:8080
 ```
 
-The observed response was HTTP 200, which indicates that the request was successful.
+The observed response was HTTP 200, indicating that the request was successful.
 
 ### Testing a Missing Page
 
@@ -54,41 +54,58 @@ The following command requests a page that does not exist:
 curl http://localhost:8080/hidden-admin-page
 ```
 
-The server returned HTTP 404 because the requested page was not found. This test demonstrates how a web server responds when a visitor requests an unavailable resource.
+The server returned HTTP 404 because the requested page was not found.
 
 ## 4. Reviewing Application Logs
 
-The Nginx logs can be viewed using:
+The container logs were inspected using:
 
 ```bash
 docker logs client-website
 ```
 
-The observed logs contained two successful HTTP 200 responses and one failed HTTP 404 response. The failed request was associated with `/hidden-admin-page`.
+The captured output showed two successful HTTP 200 responses and one failed HTTP 404 response.
 
 ### Example of the HTTP 404 Log Entry
 
 ```text
-172.17.0.1 - - [13/Oct/2026:07:25:06 +0000] "GET /hidden-admin-page HTTP/1.1" 404 153 "-" "curl/8.5.0" "-"
+172.17.0.1 - - [13/Oct/2026:08:19:00 +0000] "GET /hidden-admin-page HTTP/1.1" 404 153 "-" "curl/8.5.0" "-"
 ```
 
-Application logs help engineers understand the events that occur inside a service. They can reveal failed requests and other errors, making it easier to investigate problems and determine what may have caused them.
+Application logs help engineers investigate failed requests and understand application behavior. The recorded request path, response code, and timestamp provide useful evidence when troubleshooting website problems.
 
 ## 5. Monitoring Container Resources
 
-Docker provides the `docker stats` command for observing resource usage while a container is running.
+Docker's `docker stats` command was used to observe the resource consumption of the running container.
+
+Command used:
 
 ```bash
 docker stats
 ```
 
-The output includes CPU percentage, memory usage, memory limits, and Network I/O. These measurements help show how much of the host's resources the container is consuming.
+### Actual Metrics Observed
 
-The actual CPU percentage, memory usage, and Network I/O values will be recorded after the monitoring command is executed and a screenshot is captured.
+| Metric | Observed Value |
+|---|---|
+| Container name | `client-website` |
+| CPU usage | 0.00% |
+| Memory usage | 2.73 MiB |
+| Memory limit | 1.859 GiB |
+| Memory usage percentage | 0.14% |
+| Network I/O | 3.23 kB received / 2.86 kB sent |
+| Block I/O | 0 B read / 12.3 kB written |
+| PIDs | 2 |
+
+### Analysis
+
+At the time of measurement, the container used 0.00% CPU and 2.73 MiB of memory, equivalent to 0.14% of its displayed memory limit. Network I/O was 3.23 kB received and 2.86 kB sent.
+
+These readings indicate low resource consumption during the observation. However, the values may change as the container handles additional requests or workload.
 
 ## 6. Evidence and Screenshots
 
-The following evidence will be stored in the `screenshots/` folder:
+The following screenshots should be stored in the `screenshots/` folder:
 
 | Filename | Description |
 |---|---|
@@ -98,8 +115,8 @@ The following evidence will be stored in the `screenshots/` folder:
 | `simulation1.png` | Successful HTTP request |
 | `simulation2.png` | Missing-page request returning HTTP 404 |
 | `docker-logs.png` | Application logs showing HTTP responses |
-| `container-metrics.png` | Live container resource measurements |
+| `container-metrics.png` | Docker resource metrics |
 
 ## 7. Conclusion
 
-This laboratory activity provided practical experience in deploying a containerized web server, testing HTTP requests, and reviewing application logs. It also introduced Docker's resource monitoring capabilities. Using both logs and metrics helps engineers investigate application errors and evaluate the performance of containerized services.
+This laboratory provided practical experience in deploying an Nginx container, testing HTTP requests, examining application logs, and monitoring resource consumption. Logs help explain individual events, while metrics provide numerical information about container performance. Together, these tools help engineers troubleshoot problems and assess the health of containerized services.
