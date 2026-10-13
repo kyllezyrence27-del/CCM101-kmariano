@@ -6,42 +6,58 @@
 
 ## 1. Mission Overview
 
-For this mission, I will take the role of a Cloud Operations Engineer responsible for checking server readiness before a website experiences increased traffic. The activity uses Linux system utilities and Docker to examine the host environment, run an Nginx web server, and investigate the results of simulated web requests.
+For this mission, I took the role of a Cloud Operations Engineer responsible for checking server readiness before a website experiences increased traffic. The activity used Linux system utilities and Docker to inspect the host environment, run an Nginx web server, and investigate the results of simulated web requests.
 
-The main purpose is to understand how system measurements, application logs, and container statistics help engineers assess infrastructure health and troubleshoot problems.
+The main purpose was to understand how system measurements, application logs, and container statistics help engineers assess infrastructure health and troubleshoot problems.
 
 ## 2. Objectives
 
 - Establish a baseline of the Linux host's CPU, memory, and storage.
-- Run an Nginx container using Docker.
+- Deploy an Nginx container using Docker.
 - Send test HTTP requests to the website.
 - Review access logs for successful responses and page errors.
-- Observe container resource consumption in real time.
-- Present the findings through organized documentation and screenshots.
+- Observe container resource consumption.
+- Document findings and organize screenshot evidence in GitHub.
 
 ## 3. Commands and Their Uses
 
-| Command | What it helps me examine |
+| Command | Purpose |
 |---|---|
-| `lscpu` | Processor details and available CPU configuration |
-| `free -h` | RAM and swap capacity |
-| `df -h /` | Available disk space on the root filesystem |
-| `top` | Active processes and CPU utilization |
-| `docker ps` | Container status and port mappings |
-| `docker logs client-website` | Requests recorded by the web server |
-| `docker stats` | Container CPU, memory, and network statistics |
-| `curl` | HTTP responses from the deployed website |
+| `cat /etc/os-release` | Identifies the operating system |
+| `uname -r` | Displays the Linux kernel version |
+| `lscpu` | Displays processor information |
+| `free -h` | Checks RAM and swap usage |
+| `df -h /` | Checks root filesystem capacity |
+| `top` | Monitors running processes and CPU activity |
+| `docker run -d --name client-website -p 8080:80 nginx` | Starts the Nginx container in the background |
+| `docker ps` | Checks running containers |
+| `curl http://localhost:8080` | Requests the Nginx welcome page |
+| `curl -I http://localhost:8080` | Checks the HTTP response headers |
+| `curl http://localhost:8080/hidden-admin-page` | Tests a missing page |
+| `docker logs client-website` | Displays container logs |
+| `docker stats` | Displays live container resource statistics |
 
-## 4. Test Evidence
+## 4. Test Evidence and Results
 
-I will attach the screenshots captured during the host inspection, Nginx deployment, HTTP traffic simulation, log inspection, and resource monitoring checkpoints. Actual values and observations will be recorded after each test is completed.
+The host inspection recorded memory and disk information for the Linux environment. The root filesystem had a reported capacity of 19 GB, with 13 GB available and 30% disk usage.
+
+An Nginx container named `client-website` was configured to serve traffic through host port 8080. HTTP testing showed successful requests to the website and an unsuccessful request to `/hidden-admin-page`, which returned HTTP 404.
+
+The container logs showed two successful HTTP 200 responses and one HTTP 404 response in the captured output. These results demonstrate how access logs can help distinguish successful requests from requests for unavailable pages.
+
+Container resource measurements should also be recorded in `container-observability.md` after checking `docker stats`. The corresponding screenshots will be stored in the `screenshots/` folder.
 
 ## 5. Skills Developed
 
-This mission provides practice in Linux resource inspection, container management, HTTP request testing, troubleshooting with logs, Docker monitoring, technical writing, and maintaining a cloud computing portfolio.
+This mission provided practice in:
+
+- Linux resource inspection and system administration.
+- Docker container deployment and management.
+- HTTP request testing with `curl`.
+- Application log inspection and error identification.
+- Container performance monitoring.
+- Markdown documentation and GitHub portfolio management.
 
 ## 6. Conclusion
 
-A running web server does not automatically mean that an application is healthy. Engineers also need to check the underlying system resources, verify HTTP responses, and review the logs to understand what happens during normal and unsuccessful requests.
-
-The evidence gathered throughout this activity will be used to evaluate the test environment and explain how monitoring supports reliable infrastructure operations.
+This laboratory demonstrated that a running web server should be checked at both the application and host levels. Examining system resources, verifying HTTP responses, reviewing logs, and monitoring container metrics helps engineers investigate errors and evaluate infrastructure health. These skills are useful for maintaining reliable cloud services.
