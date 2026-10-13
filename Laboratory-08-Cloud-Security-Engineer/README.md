@@ -1,98 +1,162 @@
-# Laboratory Activity 08: Cloud Security Engineer
+# Laboratory Activity 08: The Cloud Security Engineer
 
 **Student:** Kylle Zyrence F. Mariano  
 **Course:** CCM101 – Cloud Computing  
-**Laboratory Environment:** Ubuntu Linux (KillerCoda)  
-**Tools:** Docker, Nginx, UFW, cURL, and GitHub
+**Laboratory Environment:** KillerCoda Ubuntu Linux  
+**Tools Used:** Docker, Nginx, UFW, cURL, and GitHub
 
-## Mission Introduction
+## Mission Overview
 
-Cloud infrastructure security is an essential responsibility in managing modern IT environments. This laboratory introduces fundamental techniques for protecting a Linux-based cloud server through network access restrictions and firewall management.
+This laboratory activity explores the importance of securing cloud infrastructure through firewall configuration and controlled network access. It provides hands-on experience in deploying a web application, implementing security policies, and verifying that essential services remain operational.
 
-The activity focuses on deploying a containerized web application, identifying potential security risks, and implementing firewall policies to control incoming and outgoing network traffic.
+As part of the Cloud Security Engineer mission, the activity demonstrates how Ubuntu firewall rules can be used to restrict incoming connections while permitting authorized network services.
 
 ## Learning Objectives
 
-- Explain the importance of security in cloud infrastructure.
-- Understand the Principle of Least Privilege.
-- Recognize common attack surfaces in networked systems.
-- Apply a Default Deny security policy.
-- Configure and verify firewall rules using UFW.
-- Test the accessibility of a Docker-hosted Nginx application.
+- Explain essential principles of cloud security.
+- Understand the Principle of Least Privilege and attack surface reduction.
+- Implement a Default Deny firewall policy.
+- Deploy an Nginx web application using Docker.
+- Configure firewall rules for SSH and application traffic.
+- Verify firewall settings and application connectivity.
+- Document security testing results and observations.
 
-## Laboratory Activities
+## Checkpoint 1: Cloud Security Research
 
-### Checkpoint 1: Security Fundamentals
+The first part of the laboratory focused on understanding three fundamental cybersecurity concepts.
 
-Research and explain three fundamental security concepts:
+**Principle of Least Privilege (PoLP):** Provides users and services with only the access permissions required for their responsibilities.
 
-1. Principle of Least Privilege
-2. Attack Surface
-3. Default Deny Policy
+**Attack Surface:** Includes the different points through which a system may be accessed or potentially attacked.
 
-The complete discussion will be documented in `security-audit-report.md`.
+**Default Deny Policy:** Rejects incoming connections unless they are explicitly permitted by security rules.
 
-### Checkpoint 2: Application Deployment
+These principles help establish a foundation for protecting cloud resources.
 
-Deploy an Nginx container using Docker and expose the application through port 8080.
+**Documentation:** [Security Audit Report](security-audit-report.md)
+
+## Checkpoint 2: Deploying the Nginx Application
+
+The Docker environment was checked before deploying the application.
+
+```bash
+docker --version
+```
+
+**Observed Docker Version:** 29.1.3
+
+The Nginx container was deployed using:
 
 ```bash
 docker run -d --name secure-web-app -p 8080:80 nginx
 ```
 
-Verify application availability:
+The application was then tested through port 8080.
 
 ```bash
 curl -I http://localhost:8080
 ```
 
-### Checkpoint 3: Firewall Implementation
+**Actual Response:**
 
-Configure UFW to deny unauthorized incoming traffic while permitting essential services.
+```text
+HTTP/1.1 200 OK
+Server: nginx/1.31.6
+```
+
+The successful response confirmed that the web server was running and responding to local HTTP requests.
+
+### Screenshot 1 – Nginx Application Running
+
+![Nginx Application Running](screenshots/vulnerable-app-running.png)
+
+## Checkpoint 3: Configuring the Ubuntu Firewall
+
+The initial UFW status was checked.
+
+```bash
+ufw status verbose
+```
+
+**Initial Result:** Status: inactive
+
+The following commands were executed to establish the firewall rules:
 
 ```bash
 ufw allow 22/tcp
 ufw default deny incoming
 ufw default allow outgoing
 ufw allow 8080/tcp
+ufw show added
+ufw enable
 ```
 
-Verify the firewall configuration before enabling it.
+These commands established the default firewall policies, permitted SSH and application traffic, and activated UFW.
 
-### Checkpoint 4: Security Testing
+### Verified Firewall Settings
 
-After safely enabling UFW, inspect its active rules and test whether the Nginx application remains accessible.
-
-Record actual command outputs in the firewall configuration report.
-
-**Note:** Docker-published ports may not be fully controlled by UFW. Local connectivity alone does not verify external network restrictions.
-
-## Required Documentation
-
-| File | Purpose |
+| Security Setting | Actual Result |
 |---|---|
-| `README.md` | Laboratory overview and instructions |
-| `security-audit-report.md` | Security principles and observations |
-| `firewall-configuration.md` | Firewall configuration and test results |
-| `reflection.md` | Personal learning experience |
-| `screenshots/` | Evidence from actual terminal activities |
+| UFW Status | Active |
+| Logging | On (low) |
+| Default Incoming | Deny |
+| Default Outgoing | Allow |
+| Default Routed | Deny |
+| SSH Port 22/TCP | ALLOW IN |
+| Application Port 8080/TCP | ALLOW IN |
+| IPv6 Rules | Enabled for ports 22 and 8080 |
 
-## Screenshot Evidence
+### Screenshot 2 – Firewall Activated
 
-The following screenshots will be added after performing the practical activities.
+![UFW Firewall Configuration](screenshots/firewall-activated.png)
 
-### Nginx Application
+**Documentation:** [Firewall Configuration Report](firewall-configuration.md)
 
-![Nginx Running](screenshots/vulnerable-app-running.png)
+## Checkpoint 4: Application Connectivity Verification
 
-### UFW Firewall Status
+After enabling the firewall, the Nginx web application was tested again.
 
-![Firewall Activated](screenshots/firewall-activated.png)
+```bash
+curl -I http://localhost:8080
+```
 
-### Application Connectivity
+**Actual Response:**
 
-![Firewall Allowed](screenshots/firewall-allowed.png)
+```text
+HTTP/1.1 200 OK
+Server: nginx/1.31.6
+```
+
+This result demonstrated that the application remained accessible locally after UFW activation.
+
+**Security Consideration:** Docker-published ports can bypass certain UFW rules. Therefore, the successful local HTTP response does not independently confirm that external connections are being filtered as intended.
+
+### Screenshot 3 – Application Connectivity
+
+![Application Connectivity Test](screenshots/firewall-allowed.png)
+
+## Laboratory Documentation
+
+| File | Description |
+|---|---|
+| `README.md` | Main laboratory documentation |
+| `security-audit-report.md` | Research on cloud security principles |
+| `firewall-configuration.md` | Firewall setup and actual testing results |
+| `reflection.md` | Personal reflection and lessons learned |
+| `screenshots/` | Screenshots of practical laboratory activities |
+
+## Personal Reflection
+
+This laboratory provided practical experience in managing security settings within an Ubuntu environment. It highlighted the importance of applying restrictive firewall policies, allowing only necessary connections, and verifying application functionality after implementing security changes.
+
+The activity also demonstrated that effective cloud security involves understanding the interaction between different technologies, including Docker networking and Linux firewall rules.
+
+**Full Reflection:** [Laboratory Reflection](reflection.md)
 
 ## Conclusion
 
-This laboratory aims to strengthen practical knowledge of Linux server security by combining container deployment, firewall configuration, and network testing. Completing the activities will provide a foundation for understanding how security controls protect cloud-based applications.
+Laboratory Activity 08 strengthened my understanding of basic cloud security procedures through hands-on application deployment and firewall configuration.
+
+The activity successfully demonstrated the activation of UFW, the implementation of a Default Deny incoming policy, and the continued local accessibility of an Nginx application.
+
+The knowledge gained from this laboratory provides a useful foundation for further learning about cloud infrastructure protection, network access management, and secure system administration.
