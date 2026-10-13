@@ -1,41 +1,55 @@
 # Linux Host Baseline Assessment
 
-**Student:** Kylle Mariano  
+**Student:** Kylle Zyrene Mariano  
 **Course:** CCM101 – Cloud Computing  
 **Laboratory:** 07 – Cloud Operations Engineer
 
-## 1. Assessment Overview
+## 1. Purpose
 
-Before deploying the Nginx web server, the Linux host must be inspected to understand its available computing resources. This assessment will record the operating system, kernel, processor configuration, memory, and disk capacity.
+This report describes the initial system resources available in the KillerCoda Linux environment. The inspection establishes a baseline before deploying the Nginx web server and monitoring its performance.
 
-## 2. Inspection Commands
+## 2. Host Inspection Commands
 
-| Command | Information Provided |
+The following commands were used to gather information about the Linux host.
+
+| Command | Purpose |
 |---|---|
-| `cat /etc/os-release` | Linux distribution and version |
-| `uname -r` | Current kernel release |
-| `lscpu` | CPU architecture and configuration |
-| `free -h` | Memory and swap information |
-| `df -h /` | Root filesystem usage and free space |
+| `cat /etc/os-release` | Checks the installed operating system |
+| `uname -r` | Identifies the Linux kernel version |
+| `lscpu` | Displays processor and architecture details |
+| `free -h` | Displays RAM and swap usage |
+| `df -h /` | Shows root filesystem capacity and available space |
+| `top` | Displays running processes and CPU activity |
 
-## 3. Host Measurements
+## 3. Baseline Results
 
-The results below will be filled in after the commands have been run.
+The following values were observed in the shared KillerCoda environment.
 
-| Item | Recorded Result |
+| Resource | Actual Result |
 |---|---|
-| Operating system | Pending inspection |
-| Kernel release | Pending inspection |
-| CPU details | Pending inspection |
-| RAM and swap | Pending inspection |
-| Root filesystem storage | Pending inspection |
+| Operating system | Ubuntu 24.04.4 LTS |
+| Kernel version | 6.8.0-136-generic |
+| CPU configuration | Intel Xeon E312xx, x86_64 architecture, 1 CPU and 1 core |
+| Total RAM | 1.9 GiB |
+| Used RAM | 402 MiB |
+| Free RAM | 1.2 GiB |
+| Available RAM | 1.5 GiB |
+| Total swap | 1.0 GiB |
+| Root filesystem capacity | 19 GB |
+| Used disk space | 5.5 GB |
+| Available disk space | 13 GB |
+| Disk usage | 30% |
 
-## 4. Resource Evaluation
+## 4. Resource Analysis
 
-The baseline measurements help establish what resources the environment provides before container deployment. Available memory and disk space are particularly useful when assessing whether the host can accommodate the web server and its related files.
+The system inspection shows that the environment has 1.9 GiB of RAM and approximately 1.5 GiB available at the time of measurement. The root filesystem has a capacity of 19 GB, with 13 GB available.
 
-The measurements will also serve as a reference when reviewing resource consumption during the later Docker monitoring checkpoint.
+Checking disk capacity before a traffic surge is important because the server needs enough space for container images, application logs, and other data. Running out of disk space may cause errors or prevent services from operating correctly.
 
-## 5. Summary
+The CPU and memory readings also provide a reference for evaluating resource consumption after the Nginx container is deployed.
 
-Inspecting the host before deployment helps establish a clearer understanding of the environment. Actual command outputs and screenshots will be included after the system checks are completed.
+## 5. Conclusion
+
+The host inspection established the initial condition of the Linux environment before the container monitoring tasks. The collected information will help explain the resources available to the server and provide context for the observations in the succeeding checkpoints.
+
+Screenshots of the memory and disk checks will serve as evidence of the inspection process.
