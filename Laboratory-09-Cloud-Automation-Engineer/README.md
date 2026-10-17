@@ -55,7 +55,7 @@ Reflection document: [Personal Reflection](reflection.md)
 
 ## Screenshot Evidence
 
-The following screenshots will be added after completing the practical activities.
+The following screenshots show the successful execution of the backup script and the configured daily Cron schedule.
 
 ### Backup Script Execution
 
